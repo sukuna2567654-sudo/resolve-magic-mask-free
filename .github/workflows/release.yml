@@ -1,0 +1,19 @@
+name: Build Release Assets
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package .drfx Fusion Effect
+        run: |
+          cd fusion_effect
+          zip -r ../MagicMaskApply.drfx Edit/
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: MagicMaskApply.drfx
